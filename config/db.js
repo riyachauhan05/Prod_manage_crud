@@ -9,7 +9,7 @@ const connectDB = async () => {
         await mongoose.connect(process.env.COSMOSDB_URI, { 
             useNewUrlParser: true, 
             useUnifiedTopology: true,
-            serverSelectionTimeoutMS: 500000 // Increase timeout for server selection
+            serverSelectionTimeoutMS: 5000000 // Increase timeout for server selection
         });
         console.log('CosmosDB connected');
     } catch (error) {
