@@ -18,13 +18,20 @@ exports.register = async (req, res) => {
     }
 };
 
-// Login user and return JWT
 exports.login = async (req, res) => {
     const { username, password } = req.body;
 
     try {
         const user = await User.findOne({ username });
-        if (!user || !(await bcrypt.compare(password, user.password))) {
+        if (!user) {
+            return res.status(401).json({ message: 'Invalid username or password' });
+        }
+
+        console.log('Stored Hashed Password:', user.password); // Log the stored hashed password
+        console.log('Input Password:', password); // Log the input password
+
+        const passwordMatch = await bcrypt.compare(password, user.password);
+        if (!passwordMatch) {
             return res.status(401).json({ message: 'Invalid username or password' });
         }
 
@@ -34,3 +41,4 @@ exports.login = async (req, res) => {
         res.status(500).json({ message: 'Error logging in', error: error.message });
     }
 };
+

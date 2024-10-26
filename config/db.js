@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const connectDB = async () => {
+    console.log('COSMOSDB_URI:', process.env.COSMOSDB_URI);
     try {
         await mongoose.connect(process.env.COSMOSDB_URI, { 
             useNewUrlParser: true, 

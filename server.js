@@ -2,6 +2,7 @@ const express = require('express');
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
+const verificationRouter=require("./routes/verificationRoutes")
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -15,6 +16,7 @@ connectDB();
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
+app.use('/verification', verificationRouter)
 
 // Start the server
 const PORT = process.env.PORT || 5000;
